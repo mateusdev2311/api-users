@@ -27,10 +27,10 @@ app.post('/usuarios',async(req,res) =>{
 
 app.get('/usuarios',async(req,res) =>{
 
-    let usuario = []
+    let users = []
 
    if(req.query){
-        usuario = await prisma.User.findMany({
+        users = await prisma.User.findMany({
             where:{
                 name: req.query.name,
                 email: req.query.email,
@@ -38,9 +38,9 @@ app.get('/usuarios',async(req,res) =>{
             }
         })
    }else{
-
+        users = await prisma.user.findMany()
    }
-    const users = await prisma.user.findMany()
+    
 
     res.status(200).json(users)
 })
